@@ -24,12 +24,12 @@ public:
         m_Cards.clear();
     }
 
-    int GetTotal() { //Возвращает сумму очков карт руки
+    int GetTotal() const{ //Возвращает сумму очков карт руки
         int total = 0;
-        if(m_Cards.size() == 0){
+        if (m_Cards.size() == 0) {
             return 0;
         }
-        for(int i = 0; i < m_Cards.size(); ++i){
+        for (int i = 0; i < m_Cards.size(); ++i) {
             total += (int)m_Cards.at(i)->getValue();
         }
         return total;
@@ -44,3 +44,4 @@ Hand::Hand() {
 Hand::~Hand() {
 
 }
+
