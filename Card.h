@@ -1,25 +1,10 @@
 #pragma once
 
 enum class Suit { //Масть карты (трефы, бубны, червы и пики)
-    HEART = 0,
-    DIAMOND = 1,
-    CLUB = 2,
-    SPADE = 3
+    CLUBS, DIAMONDS, HEARTS, SPADES
 };
-enum class Value{ // Значение карты (туз, двойка, тройка и так долее)
-    TWO = 2,
-    THREE = 3,
-    FOUR = 4,
-    FIVE = 5,
-    SIX = 6,
-    SEVEN = 7,
-    EIGHT = 8,
-    NINE = 9,
-    TEN = 10,
-    ACE = 11,
-    JACK = 12,
-    QUEEN = 13,
-    KING = 14
+enum class Value { // Значение карты (туз, двойка, тройка и так далее)
+    ACE = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING
 };
 
 class Card {
