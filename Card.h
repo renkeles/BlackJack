@@ -1,36 +1,63 @@
 #pragma once
-
-enum class Suit { //Масть карты (трефы, бубны, червы и пики)
-    CLUBS, DIAMONDS, HEARTS, SPADES
-};
-enum class Value { // Значение карты (туз, двойка, тройка и так далее)
-    ACE = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING
-};
-
-class Card {
-private:
-    Suit _suit;
-    Value _value;
-    bool _faceDown;  //Указывает, как расположена карта — вверх лицом или рубашкой.Влияет на то, отображается она или нет
+class Card
+{
 public:
-    Card(Suit suit, Value value, bool faceDown) : _suit(suit), _value(value), _faceDown(faceDown) {}
-    Suit getSuit() {
-        return _suit;
-    }
-    Value getValue() { //Возвращает значение карты
-        return _value;
-    }
-    bool getFaceDown() {
-        return _faceDown;
-    }
+    enum rank {
+        ACE = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN,
+        JACK, QUEEN, KING
+    };
+    enum suit { CLUBS, DIAMONDS, HEARTS, SPADES };
 
-    bool setFaceDown(bool faceDown) {
-        _faceDown = faceDown;
+    Card(rank r = ACE, suit s = SPADES, bool ifu = true);
+    int GetValue() const;
+    void Flip();
 
-        return _faceDown;
-    }
+    friend std::ostream& operator<<(std::ostream& os, const Card& aCard);
 
-    bool Flip(Card& card) { //Переворачивает карту. Может использоваться для того, чтобы перевернуть карту лицом вверх или вниз
-        return card.setFaceDown(!card.getFaceDown());
-    }
+protected:
+    rank m_Rank;
+    suit m_Suit;
+    bool m_IsFaceUp;
 };
+
+Card::Card(rank r, suit s, bool ifu) : m_Rank(r), m_Suit(s), m_IsFaceUp(ifu)
+{}
+
+int Card::GetValue() const
+{
+    int value = 0;
+    if (m_IsFaceUp)
+    {
+        value = m_Rank;
+        if (value > 10)
+        {
+            value = 10;
+        }
+    }
+    return value;
+}
+
+void Card::Flip()
+{
+    m_IsFaceUp = !(m_IsFaceUp);
+}
+
+// перегружает оператор <<, чтобы получить возможность отправить
+// объект типа Card в поток cout
+std::ostream& operator<<(std::ostream& os, const Card& aCard)
+{
+    const std::string RANKS[] = { "0", "A", "2", "3", "4", "5", "6", "7", "8", "9","10", "J", "Q", "K" };
+    const std::string SUITS[] = { "c", "d", "h", "s" };
+
+    if (aCard.m_IsFaceUp)
+    {
+        os << RANKS[aCard.m_Rank] << SUITS[aCard.m_Suit];
+    }
+    else
+    {
+        os << "XX";
+    }
+
+    return os;
+}
+
