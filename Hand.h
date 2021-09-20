@@ -92,6 +92,3 @@ int Hand::GetTotal() const
 
     return total;
 }
-
-
-
