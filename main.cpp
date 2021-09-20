@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include "Game.h"
 
 int main()
 {
@@ -24,7 +25,7 @@ int main()
     std::cout << std::endl;
 
     // игровой цикл
-    /*
+
     Game aGame(names);
     char again = 'y';
     while (again != 'n' && again != 'N')
@@ -33,6 +34,6 @@ int main()
         std::cout << "\nDo you want to play again? (Y/N): ";
         std::cin >> again;
     }
-    */
+    
     return 0;
 }
